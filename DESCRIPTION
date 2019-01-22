@@ -1,0 +1,21 @@
+Package: remoteFunctionSSH
+Type: Package
+Version: 0.1.0
+Date: 2019-01-22
+Title: remoteFunctionSSH: Executing R Functions Remotely
+Authors@R: c(person("Georg", "Schnabel", role = c("aut", "cre"),
+		     email = "georg.schnabel@nucleardata.com"))
+Author: Georg Schnabel [aut, cre],
+Maintainer: Georg Schnabel <georg.schnabel@nucleardata.com>
+Depends:
+    R (>= 3.1.0)
+Description: This package enables the execution of an R function remotely.
+    Communication with the remote host takes place via ssh.
+    Once a function is registered for remote execution, it can be invoked
+    within R just as any other function.
+License: GPL (>= 3)
+URL: https://www.r-project.org, https://github.com/gschnabel/remoteFunctionSSH
+BugReports: https://github.com/gschnabel/remoteFunctionSSH/issues
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
