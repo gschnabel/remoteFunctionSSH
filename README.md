@@ -1,6 +1,6 @@
 # remoteFunctionSSH - R package 
 
-This package enables the definition of function in a
+This package enables the definition of a function in a
 local R session that can be executed transparently 
 on a remote machine over SSH.
 
@@ -32,7 +32,7 @@ R CMD INSTALL remoteFunctionSSH
 
 ## Basic usage
 
-First, setup the SSH connection to the remote machine:
+First, set up the SSH connection to the remote machine:
 ```
 remFun <- initSSH("user@host", "password", tempdir.loc="tempdir_loc", tempdir.rem="tempdir_rem")
 ```
@@ -49,7 +49,7 @@ addFun <- remFun$createRemoteFunction( function(x, y) {
 }, fun.name="addFun", show.output=TRUE)
 ```
 
-The remote function can now be conveniently executed from the local R session:
+The remote function can be conveniently executed from the local R prompt
 ```
 addFun(2,4)
 # Output:  
