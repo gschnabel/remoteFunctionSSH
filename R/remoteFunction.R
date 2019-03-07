@@ -60,7 +60,7 @@
 #' @export
 #'
 #' @import digest interactiveSSH rsyncFacility
-initSSH <- function(login, password=NULL, pwfile=NULL, port=22, PS1, regexPS1,
+initSSH <- function(login, password=NULL, pwfile=NULL, port=22, PS1="remFunPrompt>>>", regexPS1=NULL,
                     tempdir.loc=NULL, tempdir.rem=NULL, Rscript=NULL,
                     timeout.con=20, timeout.cmd=20, verbosity=1,
                     delay=c(1,1,1,5,5,5),delay2=delay*1.5,
@@ -477,8 +477,8 @@ initSSH <- function(login, password=NULL, pwfile=NULL, port=22, PS1, regexPS1,
     # prepare communication with other computer
     sshCon <<- initInteractiveSSH(login=login,password=password,pwfile=pwfile, port=port, share=TRUE,
                                   tempdir.loc=sshDir, verbosity=verbosity, PS1=PS1, regexPS1=regexPS1,
-                                  timeout.con=timeout.con, timeout.cmd=timeout.cmd,
-                                  delay=delay, delay2=delay2)
+                                  timeout.con=timeout.con, timeout.cmd=timeout.cmd)
+                                  
 
     rsyncObj <<- initRsync(login=login,pwfile=sshCon$getPwfile(),socket = sshCon$getSocketFile(),
                            tempdir.loc=sshDir, verbosity=verbosity,

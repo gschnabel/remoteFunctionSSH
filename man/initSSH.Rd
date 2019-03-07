@@ -4,10 +4,11 @@
 \alias{initSSH}
 \title{Initiate SSH}
 \usage{
-initSSH(login, password = NULL, pwfile = NULL, port = 22, PS1, regexPS1,
-  tempdir.loc = NULL, tempdir.rem = NULL, Rscript = NULL,
-  timeout.con = 20, timeout.cmd = 20, verbosity = 1, delay = c(1, 1, 1,
-  5, 5, 5), delay2 = delay * 1.5, use.exist = TRUE)
+initSSH(login, password = NULL, pwfile = NULL, port = 22,
+  PS1 = "remFunPrompt>>>", regexPS1 = NULL, tempdir.loc = NULL,
+  tempdir.rem = NULL, Rscript = NULL, timeout.con = 20,
+  timeout.cmd = 20, verbosity = 1, delay = c(1, 1, 1, 5, 5, 5),
+  delay2 = delay * 1.5, use.exist = TRUE)
 }
 \arguments{
 \item{login}{login in the form user@host}
