@@ -31,6 +31,7 @@
 #' @param delay waiting time between connection attempts (lower limit)
 #' @param delay2 waiting time between connection attempts (upper limit)
 #' @param use.exist should functions and results already available in \code{tempdir.loc} be used
+#' @param share boolean flag indicating whether ssh connection should be shared so that rsync can use it
 #'
 #' @details
 #' The returned list contains the following functions:
@@ -80,7 +81,7 @@ initSSH <- function(login, password=NULL, pwfile=NULL, port=22, PS1="remFunPromp
                     tempdir.loc=NULL, tempdir.rem=NULL, Rscript=NULL,
                     timeout.con=20, timeout.cmd=20, verbosity=1,
                     delay=c(1,1,1,5,5,5),delay2=delay*1.5,
-                    use.exist=TRUE) {
+                    use.exist=TRUE, share=FALSE) {
 
   defaults <- list(timeout.con=timeout.con, timeout.cmd=timeout.cmd,
                    delay = delay, delay2 = delay2, verbosity=verbosity)
@@ -491,12 +492,13 @@ initSSH <- function(login, password=NULL, pwfile=NULL, port=22, PS1="remFunPromp
 
 
     # prepare communication with other computer
-    sshCon <<- initInteractiveSSH(login=login,password=password,pwfile=pwfile, port=port, share=TRUE,
+    sshCon <<- initInteractiveSSH(login=login,password=password,pwfile=pwfile, port=port, share=share,
                                   tempdir.loc=sshDir, verbosity=verbosity, PS1=PS1, regexPS1=regexPS1,
                                   timeout.con=timeout.con, timeout.cmd=timeout.cmd)
                                   
+    socketFile <- if (isTRUE(share)) sshCon$getSocketFile() else NULL
 
-    rsyncObj <<- initRsync(login=login,pwfile=sshCon$getPwfile(),socket = sshCon$getSocketFile(),
+    rsyncObj <<- initRsync(login=login,pwfile=sshCon$getPwfile(),socket = socketFile,
                            tempdir.loc=sshDir, verbosity=verbosity,
                            timeout.con=timeout.con,delay=delay,delay2=delay2)
 
